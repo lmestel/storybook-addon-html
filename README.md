@@ -55,27 +55,6 @@ export const parameters = {
 };
 ```
 
-You can override the wrapper element selector used to grab the component HTML.
-
-```js
-export const parameters = {
-  html: {
-    root: '#my-custom-wrapper', // default: #root
-  },
-};
-```
-
-When using Web Components, the HTML will contain empty comments, i.e. `<!---->`.
-If you want to remove these, use the `removeEmptyComments` parameter:
-
-```js
-export const parameters = {
-  html: {
-    removeEmptyComments: true, // default: false
-  },
-};
-```
-
 You can override the `showLineNumbers` and `wrapLines` settings for the syntax
 highlighter by using the `highlighter` parameter:
 
