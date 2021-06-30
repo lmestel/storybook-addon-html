@@ -24,8 +24,7 @@
     "build": "yarn clean && babel -d ./out ./src",
     "build:watch": "babel --watch -d ./out ./src",
     "clean": "rm -rf ./out",
-    "format": "prettier --write '**/*.{js,json,md,css,yml}'",
-    "prepare": "yarn build"
+    "format": "prettier --write '**/*.{js,json,md,css,yml}'"
   },
   "author": "Whitespace",
   "license": "MIT",
