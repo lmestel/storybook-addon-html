@@ -1,32 +1,3 @@
-"use strict";
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _api = require("@storybook/api");
-
-var _SyntaxHighlighter = _interopRequireDefault(require("./SyntaxHighlighter"));
-
-var _githubGist = _interopRequireDefault(require("react-syntax-highlighter/dist/esm/styles/hljs/github-gist"));
-
-var _standalone = require("prettier/standalone");
-
-var _parserHtml = _interopRequireDefault(require("prettier/parser-html"));
-
-var _shared = require("./shared");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -45,20 +16,27 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+import React, { useEffect, useState } from 'react';
+import { useChannel, useParameter } from '@storybook/api';
+import SyntaxHighlighter from './SyntaxHighlighter';
+import style from 'react-syntax-highlighter/dist/esm/styles/hljs/github-gist';
+import { format as prettierFormat } from 'prettier/standalone';
+import prettierHtml from 'prettier/parser-html';
+import { EVENT_CODE_RECEIVED } from './shared';
 var PARAM_KEY = 'html';
 
 var HTMLPanel = function HTMLPanel() {
-  var _useState = (0, _react.useState)(''),
+  var _useState = useState(''),
       _useState2 = _slicedToArray(_useState, 2),
       html = _useState2[0],
       setHTML = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(''),
+  var _useState3 = useState(''),
       _useState4 = _slicedToArray(_useState3, 2),
       code = _useState4[0],
       setCode = _useState4[1];
 
-  var parameters = (0, _api.useParameter)(PARAM_KEY, {});
+  var parameters = useParameter(PARAM_KEY, {});
   var _parameters$highlight = parameters.highlighter;
   _parameters$highlight = _parameters$highlight === void 0 ? {} : _parameters$highlight;
   var _parameters$highlight2 = _parameters$highlight.showLineNumbers,
@@ -73,25 +51,24 @@ var HTMLPanel = function HTMLPanel() {
   }, prettier), {}, {
     // Ensure we always pick the html parser
     parser: 'html',
-    plugins: [_parserHtml.default]
+    plugins: [prettierHtml]
   });
 
-  (0, _api.useChannel)(_defineProperty({}, _shared.EVENT_CODE_RECEIVED, function (_ref) {
+  useChannel(_defineProperty({}, EVENT_CODE_RECEIVED, function (_ref) {
     var html = _ref.html;
     setHTML(html);
   }));
-  (0, _react.useEffect)(function () {
-    setCode((0, _standalone.format)(html, prettierConfig));
+  useEffect(function () {
+    setCode(prettierFormat(html, prettierConfig));
   }, [html]);
-  return /*#__PURE__*/_react.default.createElement(_SyntaxHighlighter.default, {
+  return /*#__PURE__*/React.createElement(SyntaxHighlighter, {
     language: 'xml',
     copyable: true,
     padded: true,
-    style: _githubGist.default,
+    style: style,
     showLineNumbers: showLineNumbers,
     wrapLines: wrapLines
   }, code);
 };
 
-var _default = HTMLPanel;
-exports.default = _default;
+export default HTMLPanel;

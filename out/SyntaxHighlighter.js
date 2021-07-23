@@ -1,27 +1,6 @@
-"use strict";
-
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _theming = require("@storybook/theming");
-
-var _components = require("@storybook/components");
-
-var _reactSyntaxHighlighter = _interopRequireDefault(require("react-syntax-highlighter"));
-
 var _templateObject;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -53,7 +32,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Pre = _theming.styled.pre(function (_ref) {
+import React, { Component } from 'react';
+import { styled } from '@storybook/theming';
+import { ActionBar, ScrollArea } from '@storybook/components';
+import ReactSyntaxHighlighter from 'react-syntax-highlighter';
+var Pre = styled.pre(function (_ref) {
   var theme = _ref.theme,
       padded = _ref.padded;
   return {
@@ -64,8 +47,7 @@ var Pre = _theming.styled.pre(function (_ref) {
     tabSize: '2'
   };
 });
-
-var Code = _theming.styled.code(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  flex: 1;\n  padding-right: 0;\n  opacity: 1;\n  counter-reset: line;\n\n  .code-line {\n    counter-increment: line;\n    position: relative;\n    display: block;\n    margin-left: 1.5rem;\n  }\n\n  .code-line:before {\n    content: counter(line);\n    position: absolute;\n    margin-left: -1.5rem;\n    color: #000;\n  }\n"])));
+var Code = styled.code(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  flex: 1;\n  padding-right: 0;\n  opacity: 1;\n  counter-reset: line;\n\n  .code-line {\n    counter-increment: line;\n    position: relative;\n    display: block;\n    margin-left: 1.5rem;\n  }\n\n  .code-line:before {\n    content: counter(line);\n    position: absolute;\n    margin-left: -1.5rem;\n    color: #000;\n  }\n"])));
 
 var SyntaxHighlighter = /*#__PURE__*/function (_Component) {
   _inherits(SyntaxHighlighter, _Component);
@@ -135,9 +117,9 @@ var SyntaxHighlighter = /*#__PURE__*/function (_Component) {
         return null;
       }
 
-      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_components.ScrollArea, {
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ScrollArea, {
         vertical: true
-      }, /*#__PURE__*/_react.default.createElement(_reactSyntaxHighlighter.default, _extends({
+      }, /*#__PURE__*/React.createElement(ReactSyntaxHighlighter, _extends({
         padded: padded || bordered,
         language: language,
         useInlineStyles: true,
@@ -148,7 +130,7 @@ var SyntaxHighlighter = /*#__PURE__*/function (_Component) {
         lineProps: {
           className: 'code-line'
         }
-      }, rest), children.trim())), copyable && /*#__PURE__*/_react.default.createElement(_components.ActionBar, {
+      }, rest), children.trim())), copyable && /*#__PURE__*/React.createElement(ActionBar, {
         actionItems: [{
           title: copied ? 'Copied' : 'Copy',
           onClick: this.onClick
@@ -158,9 +140,7 @@ var SyntaxHighlighter = /*#__PURE__*/function (_Component) {
   }]);
 
   return SyntaxHighlighter;
-}(_react.Component);
-
-exports.default = SyntaxHighlighter;
+}(Component);
 
 _defineProperty(SyntaxHighlighter, "defaultProps", {
   language: null,
@@ -168,3 +148,5 @@ _defineProperty(SyntaxHighlighter, "defaultProps", {
   bordered: false,
   padded: false
 });
+
+export { SyntaxHighlighter as default };
