@@ -1,8 +1,8 @@
 import { addons, makeDecorator } from '@storybook/addons';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { EVENT_CODE_RECEIVED } from '../shared';
+import { EVENT_CODE_RECEIVED } from './constants';
 
-export const withHTML = makeDecorator({
+export const withHtml = makeDecorator({
   name: 'withHTML',
   parameterName: 'html',
   skipIfNoParametersOrOptions: false,

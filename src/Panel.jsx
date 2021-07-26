@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { AddonPanel } from '@storybook/components';
 import { useChannel, useParameter } from '@storybook/api';
 
-import SyntaxHighlighter from './SyntaxHighlighter';
+import SyntaxHighlighter from './components/SyntaxHighlighter';
 import style from 'react-syntax-highlighter/dist/esm/styles/hljs/github-gist';
 import { format as prettierFormat } from 'prettier/standalone';
 import prettierHtml from 'prettier/parser-html';
 
-import { EVENT_CODE_RECEIVED } from './shared';
+import { EVENT_CODE_RECEIVED } from './constants';
 
 const PARAM_KEY = 'html';
 
-const HTMLPanel = () => {
+export const Panel = (props) => {
   const [html, setHTML] = useState('');
   const [code, setCode] = useState('');
 
@@ -37,17 +38,17 @@ const HTMLPanel = () => {
     setCode(prettierFormat(html, prettierConfig));
   }, [html]);
   return (
-    <SyntaxHighlighter
-      language={'xml'}
-      copyable={true}
-      padded={true}
-      style={style}
-      showLineNumbers={showLineNumbers}
-      wrapLines={wrapLines}
-    >
-      {code}
-    </SyntaxHighlighter>
+    <AddonPanel {...props}>
+      <SyntaxHighlighter
+        language={'xml'}
+        copyable={true}
+        padded={true}
+        style={style}
+        showLineNumbers={showLineNumbers}
+        wrapLines={wrapLines}
+      >
+        {code}
+      </SyntaxHighlighter>
+    </AddonPanel>
   );
 };
-
-export default HTMLPanel;
