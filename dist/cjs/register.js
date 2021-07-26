@@ -8,7 +8,7 @@ var _addons = require("@storybook/addons");
 
 var _Panel = _interopRequireDefault(require("./Panel"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ADDON_ID = 'html';
 var PANEL_ID = "".concat(ADDON_ID, "/panel");
@@ -20,10 +20,10 @@ _addons.addons.register(ADDON_ID, function () {
     render: function render(_ref) {
       var active = _ref.active,
           key = _ref.key;
-      return /*#__PURE__*/_react.default.createElement(_components.AddonPanel, {
+      return /*#__PURE__*/_react["default"].createElement(_components.AddonPanel, {
         active: active,
         key: key
-      }, /*#__PURE__*/_react.default.createElement(_Panel.default, null));
+      }, /*#__PURE__*/_react["default"].createElement(_Panel["default"], null));
     }
   });
 });

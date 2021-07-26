@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.decorators = void 0;
 
-var _decorators = require("../decorators");
+var _withHTML = require("../withHTML");
 
-var decorators = [_decorators.withHTML];
+var decorators = [_withHTML.withHtml];
 exports.decorators = decorators;

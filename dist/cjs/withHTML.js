@@ -3,15 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.withHTML = void 0;
+exports.withHtml = void 0;
 
 var _addons = require("@storybook/addons");
 
 var _server = require("react-dom/server");
 
-var _shared = require("../shared");
+var _constants = require("./constants");
 
-var withHTML = (0, _addons.makeDecorator)({
+var withHtml = (0, _addons.makeDecorator)({
   name: 'withHTML',
   parameterName: 'html',
   skipIfNoParametersOrOptions: false,
@@ -22,7 +22,7 @@ var withHTML = (0, _addons.makeDecorator)({
       var channel = _addons.addons.getChannel();
 
       var html = (0, _server.renderToStaticMarkup)(storyFn(context));
-      channel.emit(_shared.EVENT_CODE_RECEIVED, {
+      channel.emit(_constants.EVENT_CODE_RECEIVED, {
         html: html,
         options: parameters
       });
@@ -30,7 +30,7 @@ var withHTML = (0, _addons.makeDecorator)({
     return storyFn(context);
   }
 });
-exports.withHTML = withHTML;
+exports.withHtml = withHtml;
 
 if (module && module.hot && module.hot.decline) {
   module.hot.decline();

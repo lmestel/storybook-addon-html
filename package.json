@@ -2,9 +2,10 @@
   "name": "@whitespace/storybook-addon-html",
   "version": "5.1.0",
   "description": "A Storybook addon that extracts and displays compiled syntax-highlighted HTML",
-  "main": "out/preset.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "files": [
-    "out/**/*",
+    "dist/**/*",
     "README.md",
     "*.js"
   ],
@@ -21,27 +22,29 @@
     "url": "https://github.com/lmestel/storybook-addon-html.git"
   },
   "scripts": {
-    "build": "yarn clean && babel -d ./out ./src",
-    "build:watch": "babel --watch -d ./out ./src",
-    "clean": "rm -rf ./out",
+    "build:cjs": "babel ./src -d ./dist/cjs --extensions \".js,.jsx\"",
+    "build:esm": "babel ./src -d ./dist/esm --env-name esm --extensions \".js,.jsx\"",
+    "prebuild": "yarn clean",
+    "build": "concurrently \"yarn build:cjs\" \"yarn build:esm\"",
+    "build:watch": "babel --watch -d ./dist ./src",
+    "clean": "rm -rf ./dist",
     "format": "prettier --write '**/*.{js,json,md,css,yml}'"
   },
   "author": "Whitespace",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.13.10",
-    "@babel/core": "^7.13.10",
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/preset-env": "^7.13.12",
-    "@babel/preset-react": "^7.12.13",
-    "@storybook/addons": "^6.1.21",
-    "@storybook/react": "^6.1.21",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.22.0",
-    "eslint-plugin-react": "^7.23.1",
-    "prettier": "^2.2.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.14.8",
+    "@babel/eslint-parser": "^7.14.7",
+    "@babel/preset-env": "^7.14.8",
+    "@babel/preset-react": "^7.14.5",
+    "@storybook/addons": "^6.3.6",
+    "@storybook/react": "^6.3.6",
+    "concurrently": "^6.2.0",
+    "eslint": "^7.31.0",
+    "eslint-plugin-react": "^7.24.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "peerDependencies": {
     "@storybook/addons": "^6.1.21",
@@ -49,11 +52,11 @@
     "react-dom": "^16.8.0 || ^17.0.0"
   },
   "dependencies": {
-    "@babel/generator": "^7.13.9",
-    "@babel/parser": "^7.13.12",
-    "@storybook/api": "^6.1.21",
-    "@storybook/components": "^6.1.21",
-    "prettier": "^2.2.1",
-    "react-syntax-highlighter": "^15.4.3"
+    "@babel/generator": "^7.14.8",
+    "@babel/parser": "^7.14.8",
+    "@storybook/api": "^6.3.6",
+    "@storybook/components": "^6.3.6",
+    "prettier": "^2.3.2",
+    "react-syntax-highlighter": "^15.4.4"
   }
 }
