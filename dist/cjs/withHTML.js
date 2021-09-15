@@ -11,6 +11,10 @@ var _server = require("react-dom/server");
 
 var _constants = require("./constants");
 
+var noopDecorator = function noopDecorator(storyFn, context) {
+  return storyFn(context);
+};
+
 var withHtml = (0, _addons.makeDecorator)({
   name: 'withHTML',
   parameterName: 'html',
@@ -18,10 +22,11 @@ var withHtml = (0, _addons.makeDecorator)({
   wrapper: function wrapper(storyFn, context, _ref) {
     var _ref$parameters = _ref.parameters,
         parameters = _ref$parameters === void 0 ? {} : _ref$parameters;
+    var decorator = parameters.decorator || noopDecorator;
     setTimeout(function () {
       var channel = _addons.addons.getChannel();
 
-      var html = (0, _server.renderToStaticMarkup)(storyFn(context));
+      var html = (0, _server.renderToStaticMarkup)(decorator(storyFn, context));
       channel.emit(_constants.EVENT_CODE_RECEIVED, {
         html: html,
         options: parameters

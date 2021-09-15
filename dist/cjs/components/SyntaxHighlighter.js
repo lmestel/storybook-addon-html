@@ -15,6 +15,8 @@ var _components = require("@storybook/components");
 
 var _reactSyntaxHighlighter = _interopRequireDefault(require("react-syntax-highlighter"));
 
+var _excluded = ["children", "language", "copyable", "bordered", "padded", "showLineNumbers", "wrapLines"];
+
 var _templateObject;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -127,7 +129,7 @@ var SyntaxHighlighter = /*#__PURE__*/function (_Component) {
           showLineNumbers = _this$props$showLineN === void 0 ? false : _this$props$showLineN,
           _this$props$wrapLines = _this$props.wrapLines,
           wrapLines = _this$props$wrapLines === void 0 ? true : _this$props$wrapLines,
-          rest = _objectWithoutProperties(_this$props, ["children", "language", "copyable", "bordered", "padded", "showLineNumbers", "wrapLines"]);
+          rest = _objectWithoutProperties(_this$props, _excluded);
 
       var copied = this.state.copied;
 

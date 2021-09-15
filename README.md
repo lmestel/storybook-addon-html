@@ -69,6 +69,20 @@ export const parameters = {
 };
 ```
 
+You can add a [decorator](https://storybook.js.org/docs/react/writing-stories/decorators) to wrap the story:
+
+```js
+export const parameters = {
+  html: {
+    decorator: (Story, context) => (
+      <MyProvider>
+        <Story {...context}>
+      </MyProvider>
+    )
+  },
+};
+```
+
 ## Supported frameworks
 
 As of version 4.0.0 all frameworks are supported per default 🎉
