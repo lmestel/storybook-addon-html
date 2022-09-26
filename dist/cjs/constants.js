@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.EVENT_CODE_RECEIVED = exports.PANEL_ID = exports.ADDON_ID = void 0;
+exports.PANEL_ID = exports.EVENT_CODE_RECEIVED = exports.ADDON_ID = void 0;
 var ADDON_ID = 'html';
 exports.ADDON_ID = ADDON_ID;
 var PANEL_ID = "".concat(ADDON_ID, "/panel");
