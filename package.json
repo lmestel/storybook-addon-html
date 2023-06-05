@@ -1,6 +1,6 @@
 {
   "name": "@whitespace/storybook-addon-html",
-  "version": "5.3.1",
+  "version": "5.4.0",
   "description": "A Storybook addon that extracts and displays compiled syntax-highlighted HTML",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
