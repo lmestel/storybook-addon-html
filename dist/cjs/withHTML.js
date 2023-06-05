@@ -26,7 +26,7 @@ var withHtml = (0, _addons.makeDecorator)({
     setTimeout(function () {
       var channel = _addons.addons.getChannel();
 
-      var html = (0, _server.renderToStaticMarkup)(decorator(storyFn, context));
+      var html = (0, _server.renderToStaticMarkup)(decorator(context.undecoratedStoryFn, context));
       channel.emit(_constants.EVENT_CODE_RECEIVED, {
         html: html,
         options: parameters

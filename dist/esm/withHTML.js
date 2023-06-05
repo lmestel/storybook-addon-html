@@ -16,7 +16,7 @@ export var withHtml = makeDecorator({
     var decorator = parameters.decorator || noopDecorator;
     setTimeout(function () {
       var channel = addons.getChannel();
-      var html = renderToStaticMarkup(decorator(storyFn, context));
+      var html = renderToStaticMarkup(decorator(context.undecoratedStoryFn, context));
       channel.emit(EVENT_CODE_RECEIVED, {
         html: html,
         options: parameters
