@@ -1,3 +1,7 @@
+Moved to https://github.com/kickstartDS/storybook-addon-html
+
+***
+
 # Storybook Addon HTML
 
 This addon for Storybook adds a tab that displays the compiled HTML for each
